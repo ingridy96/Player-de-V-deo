@@ -1,0 +1,103 @@
+.barra_de_controles{
+				position: fixed;
+				background-color: black;
+				width: 854px;
+				height: 40px;
+				margin-top: -40px;
+				display: none;
+			}
+
+			.barra_de_reproducao{
+				background-color: white;
+				width: 50%;
+				height: 10px;
+				margin-top: 13px;
+
+			}
+			.progresso{
+				background-color: red;
+				height: 100%;
+				width: 0%;
+			}
+
+			._720p{
+				display: block;
+			}
+
+			._360p{
+				display: none;
+			}
+			._240p{
+				display: none;
+			}
+
+			.icone_play{
+				height: 100%;
+				width: auto;
+			}
+
+			.botao_controles{
+				background-color: transparent;
+				border: none;
+				width: 60px;
+				margin-left: 1em;
+			}
+			.botao_controles_qualidade{
+				position: relative;
+				color: white;
+				border: none;
+				font-size: 1.2em;
+				margin-left: 10px;
+
+				width: 100px;
+				height: auto;
+
+				background-image: url("../img/icon/icon_engrenagem.png");
+				background-repeat: no-repeat;
+				background-size: 28px;
+				background-position: 55px center; 
+				
+
+				display: flex;
+  				align-items: center
+			}
+
+			.menu_selecionar_qualidade{
+				position: absolute;
+				background-color: black;
+				color: white;
+				padding: .4em;
+				width: 5.5em;
+				margin-top: -95px;
+				margin-left: 610px;
+				display: none;
+			}
+
+			.menu_selecionar_qualidade div{
+				padding: .2em;
+				font-size: 14px;
+
+			}
+
+			.menu_selecionar_qualidade div:hover{
+				background-color: blue;
+
+			}
+
+			.menu_area_player{
+				margin-top: 1em;
+				height: 480px;
+				width: 854px;
+			}
+
+			.barra_timing{
+				color: white;
+				margin-top: 5px;
+				font-size: 1.3em;
+				padding-left: .3em;
+				padding-right: .9em;
+			}
+			.PlayerVideo{
+				height: 480px;
+				width: 854px;
+			}

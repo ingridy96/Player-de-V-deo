@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset='utf-8' />
+
+		<link rel="stylesheet" href="css/css.css"/>
+		<link rel="stylesheet" href="css/fonte.css" />
+
+	</head>
+
+	<body onLoad="tempMax();">
+
+
+		<div class="menu_area_player" onmouseover="mostrar_barra_player();" onmouseout="fechar_barra_player();">
+			<div class="PlayerVideo">
+				<video class="myVideo" width="854" height="480" >
+					<source src="video/720p/DADDYHUNT-THE_SERIAL-Episodio_4_(Dublado).mp4" type="video/mp4">
+					Player indisponível no momento.
+				</video>
+			</div>
+
+
+			<div class="barra_de_controles">
+				<div class="botao_controles" onclick="play_video();"><img class="icone_play" src="img/icon/icon_play.png" /></div>
+
+				<div class="barra_timing">
+					<span class="tempAtual">0:00</span>/<span class="tempMax">0:00</span>
+				</div>
+
+				<div onmousemove="myFunction(event);" onclick="barra_tempo_click (event);" class="barra_de_reproducao">
+					<div class="progresso"></div>
+				</div>
+
+				<div class="menu_selecionar_qualidade">
+					<div onclick="alterar_qualidade_video('720p');" >720p <span style="margin-left: 2px; color: red;">HD</span></div>
+					<div onclick="alterar_qualidade_video('480p');" >480p</div>
+					<div onclick="alterar_qualidade_video('360p');" >360p</div>
+					<div onclick="alterar_qualidade_video('240p');" >240p</div>
+				</div>
+				<div onclick="mostrar_opcao_qualidade();" class="opcao botao_controles_qualidade">720p</div>
+			</div>
+		</div>
+
+		<h2 class="fonte_titulo">DADDYHUNT THE SERIAL - Episódio 4 (Dublado)</h2>
+		<div class="fonte_descricao">
+			Episódio FANDUBLADO pela Fandublagens PT BR sem qualquer fins lucrativo.
+		</div>
+
+
+
+	<script type="text/javascript">
+
+		function mostrar_opcao_qualidade(){
+			var menuQualidade = document.querySelector(".menu_selecionar_qualidade");
+
+			if (menuQualidade.style.display == "none"){
+				menuQualidade.style.display="block";
+			}
+			else{
+				menuQualidade.style.display="none";
+			}
+		}
+
+		function mostrar_barra_player(){
+			var barraControles = document.querySelector(".barra_de_controles");
+
+			barraControles.style.display="flex";
+		}
+
+		function fechar_barra_player(){
+			var barraControles = document.querySelector(".barra_de_controles");
+
+
+			barraControles.style.display="none";
+
+		}
+
+		function alterar_qualidade_video(qualidade){
+			var player = document.querySelector(".PlayerVideo");
+			var TempoVideoAtual = pegar_tempo();
+			var play_or_pause = play_or_paused ();
+			var menuQualidade = document.querySelector(".menu_selecionar_qualidade");
+			var qualidadeAtual = document.querySelector(".botao_controles_qualidade");
+
+			/** Alterando a qualidade do vídeo de fato **/
+			if (qualidade == "720p"){
+				player.innerHTML="<video class='myVideo' width='854' height='480' ><source src='video/720p/DADDYHUNT-THE_SERIAL-Episodio_4_(Dublado).mp4' type='video/mp4'>Player indisponível no momento.</video>";
+				qualidadeAtual.innerHTML = "720p";
+				
+
+			}
+			else if (qualidade == "480p"){
+				player.innerHTML="<video class='myVideo' width='854' height='480' ><source src='video/480p/DADDYHUNT-THE_SERIAL-Episodio_4_(Dublado).mp4' type='video/mp4'>Player indisponível no momento.</video>";
+				qualidadeAtual.innerHTML = "480p";
+			}
+			else if (qualidade == "360p"){
+				player.innerHTML="<video class='myVideo' width='854' height='480' ><source src='video/360p/DADDYHUNT-THE_SERIAL-Episodio_4_(Dublado).mp4' type='video/mp4'>Player indisponível no momento.</video>";
+				qualidadeAtual.innerHTML = "360p";
+			}
+			else{
+				player.innerHTML="<video class='myVideo' width='854' height='480' ><source src='video/240p/DADDYHUNT-THE_SERIAL-Episodio_4_(Dublado).mp4' type='video/mp4'>Player indisponível no momento.</video>";
+				qualidadeAtual.innerHTML = "240p";
+			}
+
+			var play = document.querySelector(".myVideo");
+
+
+			if (play_or_pause == false){
+				play.pause();
+				play.currentTime = TempoVideoAtual;
+			}else{
+				play.play();
+				play.currentTime = TempoVideoAtual;
+			}
+
+			barra_de_tempo (play);
+			menuQualidade.style.display="none";
+
+		}
+
+
+		function play_or_paused (){
+			var myVideo = document.querySelector(".myVideo");
+			if (myVideo.paused){
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+
+		function barra_de_tempo (myVideo){
+			myVideo.addEventListener("timeupdate", function(){
+
+				var tempo = myVideo.currentTime / myVideo.duration;
+				var barra = document.querySelector(".progresso");
+				barra.style.width = tempo * 100 + "%";
+
+				tempAtual();
+
+
+				var iconePlay = document.querySelector(".icone_play");
+				if (myVideo.currentTime == myVideo.duration){
+					iconePlay.src = "img/icon/icon_play.png";
+				}
+
+
+
+			});
+		}
+
+
+
+
+
+
+		function pegar_tempo(){
+			var myVideo = document.querySelector(".myVideo");
+
+
+			console.log(myVideo);
+			return myVideo.currentTime;
+		}
+
+
+
+
+
+
+		function play_video(){
+			var myVideo = document.querySelector(".myVideo");
+			var iconePlay = document.querySelector(".icone_play");
+
+
+
+			if (myVideo.paused){
+				iconePlay.src = "img/icon/icon_pause.png";
+				myVideo.play();
+			}else{
+				iconePlay.src = "img/icon/icon_play.png";
+				myVideo.pause();
+			}
+			barra_de_tempo (myVideo);
+		}
+
+
+
+		function barra_tempo_click (barra){
+
+
+			//console.log (barra.clientX-189);
+			var atualTemp = barra.clientX-189;
+			var maxTemp = 615-189;
+
+			var pocentagem = (atualTemp*100)/maxTemp;
+			console.log (pocentagem);
+
+			var myVideo = document.querySelector(".myVideo");
+			var barra = document.querySelector(".progresso");
+			
+			myVideo.currentTime = (pocentagem*myVideo.duration)/100;
+			barra.style.width = pocentagem + "%";
+
+
+			
+
+		}
+
+		function tempAtual(){
+			var myVideo = document.querySelector(".myVideo");
+			var tempMaximo = document.querySelector(".tempAtual");
+			var tempo = myVideo.currentTime;
+
+			var minutos = parseInt(tempo/60);
+			var segundos = parseInt(tempo%60);
+
+			if (segundos < 10 ){
+				segundos = "0"+segundos;
+			}
+
+			tempMaximo.innerHTML = minutos+":"+segundos;	
+		}
+
+		function tempMax(){
+			var myVideo = document.querySelector(".myVideo");
+			var tempMaximo = document.querySelector(".tempMax");
+			var tempo = myVideo.duration;
+
+			var minutos = parseInt(tempo/60);
+			var segundos = parseInt(tempo%60);
+
+			if (segundos < 10 ){
+				segundos = "0"+segundos;
+			}
+
+			tempMaximo.innerHTML = minutos+":"+segundos;
+		}
+
+		//Construir mais tarde
+		function myFunction(e) {
+
+		  var x = e.clientX;
+		  //console.log (x);
+
+		}
+
+
+
+
+		
+	</script>
+	</body>
+</html>
